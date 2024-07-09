@@ -1,20 +1,24 @@
-import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Text, View } from 'react-native';
+import React from 'react';
+import { Provider } from 'react-redux';
+import AppStack from './src/routes/AppStack';
+import { store } from './src/app/store';
+import AppNavigationContainer from './src/navigation/NavigationContainer';
+import linking from './src/navigation/linking';
 
-export default function App() {
+const MainNavigator: React.FC = () => {
   return (
-    <View style={styles.container}>
-      <Text>Open up App.tsx to start working on your app!</Text>
-      <StatusBar style="auto" />
-    </View>
+    <AppNavigationContainer linking={linking}>
+      <AppStack />
+    </AppNavigationContainer>
   );
-}
+};
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-});
+const App: React.FC = () => {
+  return (
+    <Provider store={store}>
+      <MainNavigator />
+    </Provider>
+  );
+};
+
+export default App;
