@@ -3,8 +3,8 @@ import type { StackScreenProps } from '@react-navigation/stack';
 import type { BottomTabScreenProps } from '@react-navigation/bottom-tabs';
 
 export type RootStackParamList = {
-  Home: NavigatorScreenParams<HomeTabParamList>;
-  Feed: undefined;
+  Tabs: undefined;
+  Todo: undefined;
   Login: undefined;
 };
 

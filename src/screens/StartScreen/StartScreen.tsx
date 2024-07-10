@@ -2,8 +2,9 @@ import React, { useState, useEffect } from 'react';
 import { View, Text, TextInput, TouchableOpacity, StyleSheet } from 'react-native';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { useNavigation } from '@react-navigation/native';
-import { v4 as uuidv4 } from 'uuid';
+import uuid from 'react-native-uuid';
 import { storeData } from '../../utils/asyncStorage';
+import { navigate } from '../../navigation/NavigationService';
 
 const StartScreen: React.FC = () => {
   const [username, setUsername] = useState('');
@@ -21,10 +22,10 @@ const StartScreen: React.FC = () => {
 
   const handleStart = async () => {
     if (username) {
-      const userId = uuidv4();
+      const userId = uuid.v4();
       await storeData('username', username);
       await storeData('userId', userId);
-    //   navigation.navigate('Home');
+      navigate('Tabs');
     }
   };
 
