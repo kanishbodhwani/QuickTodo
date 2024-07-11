@@ -1,13 +1,13 @@
 import { StyleSheet } from 'react-native';
 
-export const globalContainerStyles = StyleSheet.create({
+export const globalStyles = StyleSheet.create({
   container: {
     display: 'flex',
     flex: 1,
     width: '100%',
     height: '100%',
-    backgroundColor: '#fff',
-    padding: 20,
+    backgroundColor: '#222425',
+    // padding: 20,
     position: 'relative',
   },
   defualtContainer: {
