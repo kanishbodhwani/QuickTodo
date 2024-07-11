@@ -154,15 +154,16 @@ const StartScreen: React.FC = () => {
 
           <View style={styles.mainHeadingContainer}>
             <Text style={styles.mainHeading}>
-              Weave Your Time, Make Notes Define 
+              You suck at taking notes brother, you need us :)
             </Text>
             <Text style={styles.subHeading}>
               A Todo/Note taking app
             </Text>
           </View>
 
-          <TouchableOpacity style={styles.continueButton}>
-            <Text style={styles.continueButtonText}>Continue with Love
+          <TouchableOpacity style={styles.continueButton} onPress={() => navigate('Name')} activeOpacity={0.8}>
+            <Text style={styles.continueButtonText}>
+              Continue with Love
             </Text>
             <AntDesign name="arrowright" size={18} color="#eee" />
           </TouchableOpacity>
@@ -252,7 +253,8 @@ const styles = StyleSheet.create({
   mainHeading: {
     fontSize: 54,
     fontFamily: 'Manrope_500Medium',
-    marginTop: 10
+    marginTop: 10,
+    lineHeight: 60
   },
   subHeading: {
     fontSize: 15,

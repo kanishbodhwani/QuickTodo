@@ -3,10 +3,12 @@ import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import TabNavigator from './TabNavigator';
 import StartScreen from '../screens/StartScreen/StartScreen';
 import TodoScreen from '../screens/TodoScreen/TodoScreen';
+import UsernameScreen from "../screens/UsernameScreen/UsernameScreen";
 
 type AppStackParamList = {
   Start: undefined;
   Tabs: undefined;
+  Name: undefined;
   Todo: { todo?: { id: string; text: string } } | undefined;
 };
 
@@ -16,6 +18,7 @@ const AppStack: React.FC = () => {
   return (
     <Stack.Navigator initialRouteName="Start">
       <Stack.Screen name="Start" component={StartScreen} options={{ headerShown: false }} />
+      <Stack.Screen name="Name" component={UsernameScreen} options={{ headerShown: false }} />
       <Stack.Screen name="Tabs" component={TabNavigator} options={{ headerShown: false }} />
       <Stack.Screen name="Todo" component={TodoScreen} options={{ headerShown: false }} />
     </Stack.Navigator>
