@@ -88,7 +88,7 @@ const StartScreen: React.FC = () => {
 
   const iconStyle = useAnimatedStyle(() => ({
     transform: [{ scale: iconScale.value }],
-    backgroundColor: 'white',
+    backgroundColor: '#eee',
   }));
 
   const backgroundStyle = useAnimatedStyle(() => ({
