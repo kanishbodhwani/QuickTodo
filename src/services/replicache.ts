@@ -1,13 +1,17 @@
-import { Replicache, TEST_LICENSE_KEY} from 'replicache';
+import { Replicache, TEST_LICENSE_KEY } from 'replicache';
 
-export const createUser = async (id: string, name: string) => {
+type Mutators = {
+    createUser: (tx: any, {id, username}: {id: string, username: string}) => void;
+}
+
+export const createUser = async (id: string, name: string, clientID: string, mutationID: string) => {
   try {
-    const res = await fetch('http://your-api-endpoint/api/users', {
+    const res = await fetch('http://localhost:8000/api/users', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
       },
-      body: JSON.stringify({ id, username: name }),
+      body: JSON.stringify({ id, username: name, clientID, mutationID }),
     });
 
     if (!res.ok) {
@@ -16,11 +20,16 @@ export const createUser = async (id: string, name: string) => {
 
     const user = await res.json();
 
-    const replicache = new Replicache({
+    const replicache = new Replicache<Mutators>({
       name: user.id,
-      pushURL: 'http://your-replicache-push-url',
-      pullURL: 'http://your-replicache-pull-url',
-      licenseKey: TEST_LICENSE_KEY
+      pushURL: 'http://localhost:8000/api/replicache/push',
+      pullURL: 'http://localhost:8000/api/replicache/pull',
+      licenseKey: TEST_LICENSE_KEY,
+      mutators: {
+        createUser: async (tx, {id, username}) => {
+            await tx.put(`user/${id}`, {id, username});
+        },
+      }
     });
 
     await replicache.mutate.createUser({ id: user.id, username: user.username });

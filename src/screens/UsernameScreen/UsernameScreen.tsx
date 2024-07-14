@@ -23,11 +23,25 @@ const UsernameScreen = () => {
 
   const handleSubmit = async () => {
     if (!name) return;
-    const id = uuid.v4();
+  
     try {
-        await createUser(id.toString(), name);
+      const response = await fetch('http://localhost:8000/api/next-mutation-id');
+      if (!response.ok) {
+        throw new Error('Failed to fetch next mutation ID');
+      }
+      const { mutationID } = await response.json();
+  
+      const id = uuid.v4(); // Generate a unique ID for the user
+      const clientID = uuid.v4(); // Generate a unique client ID
+  
+      await createUser(id.toString(), name, clientID.toString(), mutationID);
+  
+      // Navigate user to the Home screen
+      // Example: navigation logic
+      // navigation.navigate('Home');
+  
     } catch (error) {
-        console.error('Error creating user:', error);
+      console.error('Error creating user:', error);
     }
   };
 
